@@ -137,21 +137,39 @@ export default function HomePage() {
             ].map((feature, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 bg-white rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-medium transition-all group"
+                transition={{
+                  duration: 0.6,
+                  delay: idx * 0.12,
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 15,
+                }}
+                viewport={{ once: true, margin: '-100px' }}
+                className="group"
               >
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-200 transition-colors">
-                  <feature.icon className="w-6 h-6 text-primary-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-600">
-                  {feature.description}
-                </p>
+                <motion.div
+                  whileHover={{ y: -8 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  className="h-full"
+                >
+                  <div className="p-8 bg-white rounded-2xl border border-slate-200 hover:border-primary-300 hover:shadow-medium transition-all h-full flex flex-col">
+                    <motion.div
+                      className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-200 transition-colors"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    >
+                      <feature.icon className="w-6 h-6 text-primary-600" />
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                      {feature.title}
+                    </h3>
+                    <p className="text-slate-600 flex-1">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
