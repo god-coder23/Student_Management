@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Search, Filter } from 'lucide-react'
 import CategoryTabs from '../components/CategoryTabs'
 import ItemCard from '../components/ItemCard'
+import Dashboard3D from '../components/Dashboard3D'
 
 export default function DashboardPage() {
   const [activeCategory, setActiveCategory] = useState<'personal' | 'shared' | 'borrowed'>('personal')
