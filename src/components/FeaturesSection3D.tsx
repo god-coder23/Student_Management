@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import { Shield, Zap, Users } from 'lucide-react'
 import { useRef, useEffect, useState } from 'react'
 import { useParallax } from '../hooks/useScrollTransform'
@@ -124,14 +124,6 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
   const cardRef = useRef<HTMLDivElement>(null)
   const { ref: parallaxRef, offset } = useParallax(0.3 + index * 0.1)
 
-  const rotationY = useTransform(
-    scrollProgress,
-    [0, 1],
-    [30 - index * 20, -30 + index * 20]
-  )
-
-  const depth = useTransform(scrollProgress, [0, 1], [100 - index * 50, -50 + index * 50])
-
   return (
     <motion.div
       ref={parallaxRef}
@@ -157,7 +149,6 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         style={{
           y: offset,
-          rotateY: prefersReducedMotion ? 0 : rotationY,
           transformStyle: 'preserve-3d' as any,
         }}
         className="h-full"
@@ -211,8 +202,4 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
       </motion.div>
     </motion.div>
   )
-}
-
-function useTransform(value: any, inputRange: number[], outputRange: number[]) {
-  return value
 }
