@@ -44,12 +44,12 @@ export default function FeaturesSection3D() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-primary-50 to-white overflow-hidden"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-900 via-dark-850 to-dark-900 overflow-hidden"
     >
       {/* Background 3D layers */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
-          className="absolute top-0 right-0 w-96 h-96 bg-primary-300/20 rounded-full blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-primary-600/15 rounded-full blur-3xl"
           animate={prefersReducedMotion ? {} : {
             scale: [1, 1.2, 1],
             opacity: [0.5, 0.8, 0.5],
@@ -60,7 +60,7 @@ export default function FeaturesSection3D() {
           }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-primary-200/20 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-80 h-80 bg-primary-500/12 rounded-full blur-3xl"
           animate={prefersReducedMotion ? {} : {
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.6, 0.3],
@@ -84,10 +84,10 @@ export default function FeaturesSection3D() {
             transform: `perspective(1000px) rotateX(${(1 - scrollYProgress) * 5}deg)`,
           }}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-50 mb-6">
             Everything you need
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
             Powerful features designed for your lifestyle with dimensional depth
           </p>
         </motion.div>
@@ -154,14 +154,14 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
         className="h-full"
       >
         <div
-          className="relative p-8 bg-white rounded-3xl border border-slate-200 hover:border-primary-300 shadow-soft hover:shadow-lg-soft transition-all h-full flex flex-col overflow-hidden"
+          className="relative p-8 bg-dark-800/50 backdrop-blur-xl rounded-3xl border border-dark-700 hover:border-primary-500/50 shadow-soft hover:shadow-lg-soft transition-all h-full flex flex-col overflow-hidden"
           style={{
             transformStyle: 'preserve-3d' as any,
           }}
         >
           {/* Gradient background */}
           <motion.div
-            className={`absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br ${feature.color} rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+            className={`absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br ${feature.color} rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
           />
 
           {/* Content */}
@@ -172,30 +172,30 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
             }}
           >
             <motion.div
-              className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-md`}
+              className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
               whileHover={{
                 scale: 1.15,
                 rotate: 10,
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              <Icon className="w-7 h-7 text-white" />
+              <Icon className="w-7 h-7 text-dark-950" />
             </motion.div>
 
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+            <h3 className="text-2xl font-bold text-slate-50 mb-3">
               {feature.title}
             </h3>
 
-            <p className="text-slate-600 text-base leading-relaxed flex-1">
+            <p className="text-slate-300 text-base leading-relaxed flex-1">
               {feature.description}
             </p>
           </motion.div>
 
           {/* Interactive border effect */}
           <motion.div
-            className="absolute inset-0 border-2 border-transparent rounded-3xl pointer-events-none group-hover:border-primary-400 transition-colors duration-300"
+            className="absolute inset-0 border-2 border-transparent rounded-3xl pointer-events-none group-hover:border-primary-500/40 transition-colors duration-300"
             style={{
-              boxShadow: `inset 0 0 20px rgba(20, 184, 166, 0)`,
+              boxShadow: `inset 0 0 20px rgba(0, 196, 255, 0)`,
             }}
           />
         </div>
