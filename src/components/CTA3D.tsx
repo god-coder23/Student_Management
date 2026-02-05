@@ -25,7 +25,7 @@ export default function CTA3D() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-dark-900"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-950"
       style={{ perspective: '1200px' }}
     >
       {/* Background 3D elements */}

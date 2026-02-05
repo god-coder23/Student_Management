@@ -36,7 +36,7 @@ export default function Hero3D() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden perspective bg-dark-900"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden perspective bg-slate-950"
       style={{ perspective: '1200px' }}
     >
       {/* 3D Perspective container */}
@@ -89,7 +89,7 @@ export default function Hero3D() {
             }}
           >
             <motion.div
-              className="px-4 py-2 bg-primary-500/20 rounded-full border border-primary-500/40 backdrop-blur-sm"
+              className="px-4 py-2 bg-primary-600/20 rounded-full border border-primary-500/40 backdrop-blur-sm"
               whileHover={{ scale: 1.08, translateZ: 20 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
@@ -150,7 +150,7 @@ export default function Hero3D() {
             >
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 text-dark-950 rounded-xl font-semibold hover:bg-primary-500 transition-colors shadow-soft hover:shadow-lg-soft"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 text-slate-950 rounded-xl font-semibold hover:bg-primary-500 transition-colors shadow-soft hover:shadow-lg-soft"
               >
                 Start Managing Now
                 <ArrowRight className="w-5 h-5" />
@@ -163,7 +163,7 @@ export default function Hero3D() {
                 translateZ: prefersReducedMotion ? 0 : 15,
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-dark-700 text-slate-200 rounded-xl font-semibold hover:border-primary-500 hover:bg-primary-500/10 transition-colors"
+              className="px-8 py-4 border-2 border-slate-700 text-slate-200 rounded-xl font-semibold hover:border-primary-500 hover:bg-primary-500/10 transition-colors"
             >
               Watch Demo
             </motion.button>

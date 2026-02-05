@@ -44,7 +44,7 @@ export default function FeaturesSection3D() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark-900 via-dark-850 to-dark-900 overflow-hidden"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden"
     >
       {/* Background 3D layers */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -154,7 +154,7 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
         className="h-full"
       >
         <div
-          className="relative p-8 bg-dark-800/50 backdrop-blur-xl rounded-3xl border border-dark-700 hover:border-primary-500/50 shadow-soft hover:shadow-lg-soft transition-all h-full flex flex-col overflow-hidden"
+          className="relative p-8 bg-slate-800/50 backdrop-blur-xl rounded-3xl border border-slate-700 hover:border-primary-500/50 shadow-soft hover:shadow-lg-soft transition-all h-full flex flex-col overflow-hidden"
           style={{
             transformStyle: 'preserve-3d' as any,
           }}
@@ -179,7 +179,7 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
               }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              <Icon className="w-7 h-7 text-dark-950" />
+              <Icon className="w-7 h-7 text-slate-950" />
             </motion.div>
 
             <h3 className="text-2xl font-bold text-slate-50 mb-3">

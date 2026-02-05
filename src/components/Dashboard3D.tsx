@@ -33,7 +33,7 @@ export default function Dashboard3D({ children }: Dashboard3DProps) {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-br from-white via-primary-50 to-primary-100 pt-24 pb-12 relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-24 pb-12 relative overflow-hidden"
       style={{ perspective: '1200px' }}
     >
       {/* Animated background layers */}
@@ -44,8 +44,8 @@ export default function Dashboard3D({ children }: Dashboard3DProps) {
           opacity: prefersReducedMotion ? 1 : backgroundOpacity,
         }}
       >
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-200/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary-500/12 rounded-full blur-3xl" />
       </motion.div>
 
       {/* 3D perspective container */}
