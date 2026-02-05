@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Zap, Shield, Users } from 'lucide-react'
+import { ArrowRight, Zap, Shield, Users, CheckCircle } from 'lucide-react'
 import AnimatedBlob from '../components/AnimatedBlob'
 
 const container = {
@@ -9,8 +9,8 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
   },
 }
@@ -22,8 +22,9 @@ const item = {
     y: 0,
     transition: {
       type: 'spring',
-      stiffness: 100,
-      damping: 15,
+      stiffness: 120,
+      damping: 14,
+      mass: 1,
     },
   },
 }
