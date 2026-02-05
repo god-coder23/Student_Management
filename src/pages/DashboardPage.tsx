@@ -32,7 +32,7 @@ export default function DashboardPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-primary-50 to-primary-100 pt-24 pb-12">
+    <Dashboard3D>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -175,6 +175,6 @@ export default function DashboardPage() {
           ))}
         </motion.div>
       </div>
-    </div>
+    </Dashboard3D>
   )
 }
