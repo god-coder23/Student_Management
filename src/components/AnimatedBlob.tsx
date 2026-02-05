@@ -1,12 +1,20 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function AnimatedBlob() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const scrollYRef = useRef(0)
+  const mouseXRef = useRef(0)
+  const mouseYRef = useRef(0)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mediaQuery.matches)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas || prefersReducedMotion) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -15,7 +23,13 @@ export default function AnimatedBlob() {
       scrollYRef.current = window.scrollY
     }
 
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseXRef.current = (e.clientX / window.innerWidth) * 2 - 1
+      mouseYRef.current = (e.clientY / window.innerHeight) * 2 - 1
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
 
     // Set canvas size
     const setSize = () => {
@@ -39,19 +53,25 @@ export default function AnimatedBlob() {
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       const data = imageData.data
       for (let i = 0; i < data.length; i += 4) {
-        data[i + 3] = Math.max(0, data[i + 3] - 2) // Fade out trails
+        data[i + 3] = Math.max(0, data[i + 3] - 1.5)
       }
       ctx.putImageData(imageData, 0, 0)
 
-      const centerX = canvas.width / 2
-      const centerY = canvas.height / 2 - scrollYRef.current * 0.3
+      const centerX = canvas.width / 2 + mouseXRef.current * 30
+      const centerY = canvas.height / 2 - scrollYRef.current * 0.4 + mouseYRef.current * 30
       const baseRadius = Math.min(canvas.width, canvas.height) * 0.12
 
-      // Draw animated blobs with enhanced gradients
+      // Calculate scroll progress for color shifting
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrollProgress = docHeight > 0 ? scrollYRef.current / docHeight : 0
+
+      // Draw animated blobs with 3D depth perception
       for (let i = 0; i < 3; i++) {
-        const angle = (time + i * (Math.PI * 2 / 3)) * 0.2
-        const offsetX = Math.cos(angle) * baseRadius * 0.4
-        const offsetY = Math.sin(angle) * baseRadius * 0.4
+        // Rotation based on scroll and mouse
+        const angle = (time + i * (Math.PI * 2 / 3)) * 0.2 + scrollProgress * Math.PI
+        const mouseInfluence = (mouseXRef.current * 0.3)
+        const offsetX = (Math.cos(angle + mouseInfluence) * baseRadius * 0.4) + (mouseXRef.current * 20)
+        const offsetY = (Math.sin(angle) * baseRadius * 0.4) + (mouseYRef.current * 20)
 
         ctx.beginPath()
 
@@ -59,7 +79,9 @@ export default function AnimatedBlob() {
         for (let j = 0; j < Math.PI * 2; j += 0.04) {
           const noise1 = Math.sin(j * 3 + time * 1.5) * 0.12
           const noise2 = Math.cos(j * 5 + time * 0.8) * 0.08
-          const r = baseRadius * (0.85 + noise1 + noise2)
+          // Add scroll-based depth distortion
+          const scrollDistortion = Math.sin(j + scrollProgress * Math.PI * 2) * 0.08
+          const r = baseRadius * (0.85 + noise1 + noise2 + scrollDistortion)
           const x = centerX + offsetX + Math.cos(j) * r
           const y = centerY + offsetY + Math.sin(j) * r
 
@@ -71,7 +93,7 @@ export default function AnimatedBlob() {
         }
         ctx.closePath()
 
-        // Create enhanced gradient
+        // Create enhanced gradient with scroll-based color shift
         const gradient = ctx.createRadialGradient(
           centerX + offsetX,
           centerY + offsetY,
@@ -82,11 +104,28 @@ export default function AnimatedBlob() {
         )
 
         const color = colors[i]
-        gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.35)`)
-        gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, 0.15)`)
+        // Adjust opacity based on scroll progress for depth effect
+        const baseOpacity = 0.35 - scrollProgress * 0.15
+        const midOpacity = 0.15 - scrollProgress * 0.08
+
+        gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${Math.max(0.1, baseOpacity)})`)
+        gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${Math.max(0.05, midOpacity)})`)
         gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`)
 
         ctx.fillStyle = gradient
+        ctx.fill()
+
+        // Add subtle lighting effect
+        const lightGradient = ctx.createLinearGradient(
+          centerX - baseRadius,
+          centerY - baseRadius,
+          centerX + baseRadius,
+          centerY + baseRadius
+        )
+        lightGradient.addColorStop(0, `rgba(255, 255, 255, ${0.1 * (1 - scrollProgress)})`)
+        lightGradient.addColorStop(1, `rgba(0, 0, 0, ${0.1 * scrollProgress})`)
+
+        ctx.fillStyle = lightGradient
         ctx.fill()
       }
 
@@ -98,8 +137,9 @@ export default function AnimatedBlob() {
     return () => {
       window.removeEventListener('resize', setSize)
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [])
+  }, [prefersReducedMotion])
 
   return (
     <canvas
