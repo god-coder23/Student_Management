@@ -41,10 +41,10 @@ export default function DashboardPage() {
           transition={{ duration: 0.4 }}
           className="mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">
+          <h1 className="text-4xl sm:text-5xl font-bold text-slate-50 mb-2">
             Your Inventory
           </h1>
-          <p className="text-lg text-slate-600">
+          <p className="text-lg text-slate-300">
             Manage and organize all your items in one place
           </p>
         </motion.div>
@@ -57,20 +57,20 @@ export default function DashboardPage() {
           className="flex flex-col sm:flex-row gap-3 mb-8"
         >
           <div className="flex-1 relative group">
-            <Search className="absolute left-3 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-primary-500 transition-colors" />
+            <Search className="absolute left-3 top-3.5 w-5 h-5 text-slate-500 group-focus-within:text-primary-500 transition-colors" />
             <motion.input
               type="text"
               placeholder="Search items..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-800/50 text-slate-50 placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
               whileFocus={{ scale: 1.02 }}
             />
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:border-primary-300 transition-colors font-medium text-sm"
+            className="flex items-center justify-center gap-2 px-4 py-3 bg-slate-800 border border-slate-700 text-slate-200 rounded-xl hover:bg-slate-700 hover:border-primary-500/50 transition-colors font-medium text-sm"
           >
             <Filter className="w-5 h-5" />
             <span className="hidden sm:inline">Filter</span>
@@ -78,7 +78,7 @@ export default function DashboardPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors font-medium text-sm shadow-soft hover:shadow-medium"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-slate-950 rounded-xl hover:bg-primary-500 transition-colors font-medium text-sm shadow-soft hover:shadow-medium"
           >
             <Plus className="w-5 h-5" />
             <span className="hidden sm:inline">Add Item</span>
@@ -111,7 +111,7 @@ export default function DashboardPage() {
               ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-slate-600 text-lg">No items found</p>
+                <p className="text-slate-400 text-lg">No items found</p>
               </div>
             )}
           </motion.div>
