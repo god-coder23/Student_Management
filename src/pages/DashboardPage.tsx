@@ -109,10 +109,15 @@ export default function DashboardPage() {
 
         {/* Stats Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{
+            duration: 0.7,
+            type: 'spring',
+            stiffness: 100,
+            damping: 15,
+          }}
+          viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16"
         >
           {[
@@ -122,14 +127,40 @@ export default function DashboardPage() {
           ].map((stat, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className={`bg-gradient-to-br ${stat.color} rounded-2xl p-6 text-white shadow-medium`}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.6,
+                delay: idx * 0.12,
+                type: 'spring',
+                stiffness: 100,
+                damping: 15,
+              }}
+              viewport={{ once: true, margin: '-50px' }}
+              whileHover={{ y: -4 }}
+              className={`bg-gradient-to-br ${stat.color} rounded-2xl p-6 text-white shadow-medium hover:shadow-lg-soft transition-shadow`}
             >
-              <p className="text-sm font-medium opacity-90">{stat.label}</p>
-              <p className="text-3xl font-bold">{stat.value}</p>
+              <motion.p
+                className="text-sm font-medium opacity-90"
+                animate={{ opacity: [0.9, 1, 0.9] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                {stat.label}
+              </motion.p>
+              <motion.p
+                className="text-3xl font-bold mt-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.6,
+                  delay: idx * 0.12 + 0.2,
+                  type: 'spring',
+                  stiffness: 100,
+                }}
+                viewport={{ once: true }}
+              >
+                {stat.value}
+              </motion.p>
             </motion.div>
           ))}
         </motion.div>
