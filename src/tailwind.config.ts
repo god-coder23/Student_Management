@@ -12,22 +12,22 @@ const config: Config = {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        // Primary accent - vibrant teal/cyan
+        // Primary accent - vibrant cyan/aqua for dark mode
         primary: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          650: '#0b7f78',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          950: '#0c2524',
+          50: '#e0f7ff',
+          100: '#b3f0ff',
+          200: '#80e5ff',
+          300: '#4dd9ff',
+          400: '#26cfff',
+          500: '#00c4ff',
+          600: '#00b8f0',
+          650: '#00a8dd',
+          700: '#0099cc',
+          800: '#0078a8',
+          900: '#005a84',
+          950: '#003d5c',
         },
-        // Neutral grays
+        // Neutral grays - dark mode optimized
         slate: {
           50: '#f8fafc',
           100: '#f1f5f9',
@@ -40,6 +40,21 @@ const config: Config = {
           800: '#1e293b',
           900: '#0f172a',
           950: '#020617',
+        },
+        // Dark background palette
+        dark: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#2d3748',
+          800: '#1a202c',
+          850: '#111827',
+          900: '#0f1419',
+          950: '#030712',
         },
       },
       backgroundColor: {
