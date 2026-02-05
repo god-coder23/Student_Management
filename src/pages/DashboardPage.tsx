@@ -53,26 +53,35 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex flex-col sm:flex-row gap-4 mb-8"
+          className="flex flex-col sm:flex-row gap-3 mb-8"
         >
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
-            <input
+          <div className="flex-1 relative group">
+            <Search className="absolute left-3 top-3.5 w-5 h-5 text-slate-400 group-focus-within:text-primary-500 transition-colors" />
+            <motion.input
               type="text"
               placeholder="Search items..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all"
+              whileFocus={{ scale: 1.02 }}
             />
           </div>
-          <button className="flex items-center gap-2 px-4 py-3 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 hover:border-primary-300 transition-colors font-medium text-sm"
+          >
             <Filter className="w-5 h-5" />
-            Filter
-          </button>
-          <button className="flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors font-medium">
+            <span className="hidden sm:inline">Filter</span>
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition-colors font-medium text-sm shadow-soft hover:shadow-medium"
+          >
             <Plus className="w-5 h-5" />
-            Add Item
-          </button>
+            <span className="hidden sm:inline">Add Item</span>
+          </motion.button>
         </motion.div>
 
         {/* Category Tabs */}
