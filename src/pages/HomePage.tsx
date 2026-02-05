@@ -20,8 +20,8 @@ export default function HomePage() {
       <CTA3D />
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center text-slate-600">
+      <footer className="border-t border-slate-700 py-12 px-4 sm:px-6 lg:px-8 bg-slate-950">
+        <div className="max-w-6xl mx-auto text-center text-slate-400">
           <p>© 2024 Student Inventory. Built for hostel life.</p>
         </div>
       </footer>
