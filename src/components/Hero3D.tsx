@@ -36,21 +36,21 @@ export default function Hero3D() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden perspective"
+      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden perspective bg-dark-900"
       style={{ perspective: '1200px' }}
     >
       {/* 3D Perspective container */}
       <div
         className="absolute inset-0 -z-20"
         style={{
-          transform: prefersReducedMotion 
+          transform: prefersReducedMotion
             ? 'none'
             : `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`,
           transformStyle: 'preserve-3d' as any,
           transition: 'transform 0.1s linear',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-radial from-primary-50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-radial from-primary-600/10 via-transparent to-transparent" />
       </div>
 
       {/* Parallax layers */}
@@ -61,7 +61,7 @@ export default function Hero3D() {
           y: prefersReducedMotion ? 0 : y,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-200/30 to-transparent rounded-full blur-3xl scale-150" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-500/20 to-transparent rounded-full blur-3xl scale-150" />
       </motion.div>
 
       <div className="max-w-5xl mx-auto w-full relative z-10">
@@ -89,11 +89,11 @@ export default function Hero3D() {
             }}
           >
             <motion.div
-              className="px-4 py-2 bg-primary-100 rounded-full border border-primary-300 backdrop-blur-sm"
+              className="px-4 py-2 bg-primary-500/20 rounded-full border border-primary-500/40 backdrop-blur-sm"
               whileHover={{ scale: 1.08, translateZ: 20 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              <p className="text-sm font-medium text-primary-700">✨ Modern inventory management</p>
+              <p className="text-sm font-medium text-primary-300">✨ Modern inventory management</p>
             </motion.div>
           </motion.div>
 
@@ -104,12 +104,12 @@ export default function Hero3D() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-6"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-50 tracking-tight leading-tight">
               Never Lose Track of Your
               <motion.span
-                className="block bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 bg-clip-text text-transparent"
+                className="block bg-gradient-to-r from-primary-400 via-primary-300 to-primary-500 bg-clip-text text-transparent"
                 style={{
-                  backgroundPosition: prefersReducedMotion 
+                  backgroundPosition: prefersReducedMotion
                     ? '0% 0%'
                     : `${transform.scrollProgress * 100}% 0%`,
                   backgroundSize: '200% 100%',
@@ -125,7 +125,7 @@ export default function Hero3D() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg sm:text-xl text-slate-600 mb-8 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto"
             style={{
               y: prefersReducedMotion ? 0 : offset * 0.5,
             }}
@@ -150,7 +150,7 @@ export default function Hero3D() {
             >
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition-colors shadow-soft hover:shadow-lg-soft"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-600 text-dark-950 rounded-xl font-semibold hover:bg-primary-500 transition-colors shadow-soft hover:shadow-lg-soft"
               >
                 Start Managing Now
                 <ArrowRight className="w-5 h-5" />
@@ -163,7 +163,7 @@ export default function Hero3D() {
                 translateZ: prefersReducedMotion ? 0 : 15,
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-slate-300 text-slate-900 rounded-xl font-semibold hover:border-primary-400 hover:bg-primary-50 transition-colors"
+              className="px-8 py-4 border-2 border-dark-700 text-slate-200 rounded-xl font-semibold hover:border-primary-500 hover:bg-primary-500/10 transition-colors"
             >
               Watch Demo
             </motion.button>
@@ -173,28 +173,28 @@ export default function Hero3D() {
 
       {/* Floating accent elements for depth */}
       <motion.div
-        className="absolute top-20 left-10 w-40 h-40 bg-primary-300/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute top-20 left-10 w-40 h-40 bg-primary-500/15 rounded-full blur-3xl pointer-events-none"
         animate={prefersReducedMotion ? {} : {
           y: [0, 30, 0],
           x: [0, 20, 0],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{
-          transform: prefersReducedMotion 
+          transform: prefersReducedMotion
             ? 'none'
             : `translateZ(${Math.max(0, 100 - transform.scrollProgress * 200)}px)`,
         }}
       />
 
       <motion.div
-        className="absolute bottom-20 right-10 w-56 h-56 bg-primary-400/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-20 right-10 w-56 h-56 bg-primary-400/12 rounded-full blur-3xl pointer-events-none"
         animate={prefersReducedMotion ? {} : {
           y: [0, -40, 0],
           x: [0, -20, 0],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         style={{
-          transform: prefersReducedMotion 
+          transform: prefersReducedMotion
             ? 'none'
             : `translateZ(${Math.max(0, 50 - transform.scrollProgress * 150)}px)`,
         }}
