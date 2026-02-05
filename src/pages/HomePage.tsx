@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion'
-import AnimatedBlob from '../components/AnimatedBlob'
-import Hero3D from '../components/Hero3D'
-import FeaturesSection3D from '../components/FeaturesSection3D'
-import CTA3D from '../components/CTA3D'
+import { motion } from "framer-motion";
+import AnimatedBlob from "../components/AnimatedBlob";
+import Hero3D from "../components/Hero3D";
+import FeaturesSection3D from "../components/FeaturesSection3D";
+import CTA3D from "../components/CTA3D";
 
 export default function HomePage() {
-
   return (
     <div className="relative overflow-hidden">
       <AnimatedBlob />
@@ -26,5 +25,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

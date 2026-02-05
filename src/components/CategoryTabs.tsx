@@ -1,16 +1,31 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 interface CategoryTabsProps {
-  activeCategory: 'personal' | 'shared' | 'borrowed'
-  setActiveCategory: (category: 'personal' | 'shared' | 'borrowed') => void
+  activeCategory: "personal" | "shared" | "borrowed";
+  setActiveCategory: (category: "personal" | "shared" | "borrowed") => void;
 }
 
-export default function CategoryTabs({ activeCategory, setActiveCategory }: CategoryTabsProps) {
+export default function CategoryTabs({
+  activeCategory,
+  setActiveCategory,
+}: CategoryTabsProps) {
   const categories = [
-    { id: 'personal', label: '👤 Personal', description: 'Your personal items' },
-    { id: 'shared', label: '🤝 Shared', description: 'Items shared with roommates' },
-    { id: 'borrowed', label: '🤲 Borrowed', description: 'Items borrowed from others' },
-  ] as const
+    {
+      id: "personal",
+      label: "👤 Personal",
+      description: "Your personal items",
+    },
+    {
+      id: "shared",
+      label: "🤝 Shared",
+      description: "Items shared with roommates",
+    },
+    {
+      id: "borrowed",
+      label: "🤲 Borrowed",
+      description: "Items borrowed from others",
+    },
+  ] as const;
 
   return (
     <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
@@ -23,28 +38,37 @@ export default function CategoryTabs({ activeCategory, setActiveCategory }: Cate
           whileTap={{ scale: 0.96 }}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: idx * 0.1, type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{
+            delay: idx * 0.1,
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
         >
           <motion.div
             layoutId="activeTab"
             className={`absolute inset-0 rounded-xl transition-all ${
               activeCategory === category.id
-                ? 'bg-primary-600 shadow-medium'
-                : 'bg-white border border-slate-200 group-hover:border-primary-300'
+                ? "bg-primary-600 shadow-medium"
+                : "bg-white border border-slate-200 group-hover:border-primary-300"
             }`}
             initial={false}
             animate={{
-              backgroundColor: activeCategory === category.id ? 'rgb(13, 148, 136)' : 'white',
+              backgroundColor:
+                activeCategory === category.id ? "rgb(13, 148, 136)" : "white",
             }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           />
           <motion.span
             className={`relative block transition-colors ${
-              activeCategory === category.id ? 'text-white' : 'text-slate-700 group-hover:text-primary-600'
+              activeCategory === category.id
+                ? "text-white"
+                : "text-slate-700 group-hover:text-primary-600"
             }`}
             initial={false}
             animate={{
-              color: activeCategory === category.id ? 'white' : 'rgb(55, 65, 81)',
+              color:
+                activeCategory === category.id ? "white" : "rgb(55, 65, 81)",
             }}
           >
             {category.label}
@@ -52,5 +76,5 @@ export default function CategoryTabs({ activeCategory, setActiveCategory }: Cate
         </motion.button>
       ))}
     </div>
-  )
+  );
 }

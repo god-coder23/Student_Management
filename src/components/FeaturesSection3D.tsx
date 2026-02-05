@@ -1,45 +1,48 @@
-import { motion, useScroll } from 'framer-motion'
-import { Shield, Zap, Users } from 'lucide-react'
-import { useRef, useEffect, useState } from 'react'
-import { useParallax } from '../hooks/useScrollTransform'
+import { motion, useScroll } from "framer-motion";
+import { Shield, Zap, Users } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { useParallax } from "../hooks/useScrollTransform";
 
 const features = [
   {
     icon: Shield,
-    title: 'Secure Organization',
-    description: 'Keep track of personal, shared, and borrowed items with clear categorization.',
-    color: 'from-blue-500 to-blue-600',
+    title: "Secure Organization",
+    description:
+      "Keep track of personal, shared, and borrowed items with clear categorization.",
+    color: "from-blue-500 to-blue-600",
     delay: 0,
   },
   {
     icon: Zap,
-    title: 'Instant Insights',
-    description: 'Quick status overview and real-time updates on all your inventory.',
-    color: 'from-yellow-500 to-orange-500',
+    title: "Instant Insights",
+    description:
+      "Quick status overview and real-time updates on all your inventory.",
+    color: "from-yellow-500 to-orange-500",
     delay: 0.1,
   },
   {
     icon: Users,
-    title: 'Shared Access',
-    description: 'Coordinate with roommates and manage shared items effortlessly.',
-    color: 'from-purple-500 to-pink-500',
+    title: "Shared Access",
+    description:
+      "Coordinate with roommates and manage shared items effortlessly.",
+    color: "from-purple-500 to-pink-500",
     delay: 0.2,
   },
-]
+];
 
 export default function FeaturesSection3D() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start center', 'end center'],
-  })
+    offset: ["start center", "end center"],
+  });
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
-  }, [])
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+  }, []);
 
   return (
     <section
@@ -50,10 +53,14 @@ export default function FeaturesSection3D() {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           className="absolute top-0 right-0 w-96 h-96 bg-primary-600/15 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : {
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
+          animate={
+            prefersReducedMotion
+              ? {}
+              : {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.5, 0.8, 0.5],
+                }
+          }
           transition={{ duration: 10, repeat: Infinity }}
           style={{
             transform: `translateY(${(1 - scrollYProgress) * 100}px)`,
@@ -61,10 +68,14 @@ export default function FeaturesSection3D() {
         />
         <motion.div
           className="absolute bottom-0 left-0 w-80 h-80 bg-primary-500/12 rounded-full blur-3xl"
-          animate={prefersReducedMotion ? {} : {
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.6, 0.3],
-          }}
+          animate={
+            prefersReducedMotion
+              ? {}
+              : {
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.3, 0.6, 0.3],
+                }
+          }
           transition={{ duration: 12, repeat: Infinity }}
           style={{
             transform: `translateY(${scrollYProgress * 150}px)`,
@@ -77,8 +88,8 @@ export default function FeaturesSection3D() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
-          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-20"
           style={{
             transform: `perspective(1000px) rotateX(${(1 - scrollYProgress) * 5}deg)`,
@@ -95,7 +106,7 @@ export default function FeaturesSection3D() {
         {/* Feature cards with 3D depth */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, idx) => {
-            const Icon = feature.icon
+            const Icon = feature.icon;
             return (
               <FeatureCard3D
                 key={idx}
@@ -104,25 +115,30 @@ export default function FeaturesSection3D() {
                 scrollProgress={scrollYProgress}
                 prefersReducedMotion={prefersReducedMotion}
               />
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 interface FeatureCard3DProps {
-  feature: typeof features[0]
-  index: number
-  scrollProgress: any
-  prefersReducedMotion: boolean
+  feature: (typeof features)[0];
+  index: number;
+  scrollProgress: any;
+  prefersReducedMotion: boolean;
 }
 
-function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }: FeatureCard3DProps) {
-  const Icon = feature.icon
-  const cardRef = useRef<HTMLDivElement>(null)
-  const { ref: parallaxRef, offset } = useParallax(0.3 + index * 0.1)
+function FeatureCard3D({
+  feature,
+  index,
+  scrollProgress,
+  prefersReducedMotion,
+}: FeatureCard3DProps) {
+  const Icon = feature.icon;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { ref: parallaxRef, offset } = useParallax(0.3 + index * 0.1);
 
   return (
     <motion.div
@@ -132,13 +148,13 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
       transition={{
         duration: 0.6,
         delay: feature.delay,
-        type: 'spring',
+        type: "spring",
         stiffness: 100,
         damping: 15,
       }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: "-100px" }}
       className="group perspective"
-      style={{ perspective: '1000px' }}
+      style={{ perspective: "1000px" }}
     >
       <motion.div
         ref={cardRef}
@@ -146,17 +162,17 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
           scale: prefersReducedMotion ? 1 : 1.08,
           y: -12,
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         style={{
           y: offset,
-          transformStyle: 'preserve-3d' as any,
+          transformStyle: "preserve-3d" as any,
         }}
         className="h-full"
       >
         <div
           className="relative p-8 bg-slate-800/50 backdrop-blur-xl rounded-3xl border border-slate-700 hover:border-primary-500/50 shadow-soft hover:shadow-lg-soft transition-all h-full flex flex-col overflow-hidden"
           style={{
-            transformStyle: 'preserve-3d' as any,
+            transformStyle: "preserve-3d" as any,
           }}
         >
           {/* Gradient background */}
@@ -168,7 +184,7 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
           <motion.div
             className="relative z-10"
             style={{
-              transform: prefersReducedMotion ? 'none' : 'translateZ(20px)',
+              transform: prefersReducedMotion ? "none" : "translateZ(20px)",
             }}
           >
             <motion.div
@@ -177,7 +193,7 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
                 scale: 1.15,
                 rotate: 10,
               }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
               <Icon className="w-7 h-7 text-slate-950" />
             </motion.div>
@@ -201,5 +217,5 @@ function FeatureCard3D({ feature, index, scrollProgress, prefersReducedMotion }:
         </div>
       </motion.div>
     </motion.div>
-  )
+  );
 }

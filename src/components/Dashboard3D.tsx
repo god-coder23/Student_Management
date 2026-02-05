@@ -1,40 +1,40 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useEffect, useState } from 'react'
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 interface Dashboard3DProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Dashboard3D({ children }: Dashboard3DProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-  })
+  });
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
-  }, [])
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+  }, []);
 
   const backgroundScale = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1, 1.05, 0.98]
-  )
+    [1, 1.05, 0.98],
+  );
 
   const backgroundOpacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.7, 1],
-    [1, 1, 0.8, 0.5]
-  )
+    [1, 1, 0.8, 0.5],
+  );
 
   return (
     <div
       ref={containerRef}
       className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-24 pb-12 relative overflow-hidden"
-      style={{ perspective: '1200px' }}
+      style={{ perspective: "1200px" }}
     >
       {/* Animated background layers */}
       <motion.div
@@ -51,15 +51,19 @@ export default function Dashboard3D({ children }: Dashboard3DProps) {
       {/* 3D perspective container */}
       <motion.div
         style={{
-          transformStyle: 'preserve-3d' as any,
+          transformStyle: "preserve-3d" as any,
         }}
-        animate={prefersReducedMotion ? {} : {
-          rotateX: [0, 2, 0],
-        }}
+        animate={
+          prefersReducedMotion
+            ? {}
+            : {
+                rotateX: [0, 2, 0],
+              }
+        }
         transition={{ duration: 8, repeat: Infinity }}
       >
         {children}
       </motion.div>
     </div>
-  )
+  );
 }

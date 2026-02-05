@@ -1,53 +1,53 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import { useScrollTransform, useParallax } from '../hooks/useScrollTransform'
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { useScrollTransform, useParallax } from "../hooks/useScrollTransform";
 
 export default function Hero3D() {
-  const heroRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollY } = useScroll()
-  
-  const transform = useScrollTransform()
-  const { ref: parallaxRef, offset } = useParallax(0.8)
-  
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const heroRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+
+  const transform = useScrollTransform();
+  const { ref: parallaxRef, offset } = useParallax(0.8);
+
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
-    
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
     const handler = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches)
-    }
-    
-    mediaQuery.addListener(handler)
-    return () => mediaQuery.removeListener(handler)
-  }, [])
+      setPrefersReducedMotion(e.matches);
+    };
 
-  const y = useTransform(scrollY, [0, 500], [0, 150])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.5])
-  const scale = useTransform(scrollY, [0, 500], [1, 0.95])
+    mediaQuery.addListener(handler);
+    return () => mediaQuery.removeListener(handler);
+  }, []);
 
-  const rotX = prefersReducedMotion ? 0 : transform.rotationX * 0.5
-  const rotY = prefersReducedMotion ? 0 : (transform.scrollProgress * 10)
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.5]);
+  const scale = useTransform(scrollY, [0, 500], [1, 0.95]);
+
+  const rotX = prefersReducedMotion ? 0 : transform.rotationX * 0.5;
+  const rotY = prefersReducedMotion ? 0 : transform.scrollProgress * 10;
 
   return (
     <section
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden perspective bg-slate-950"
-      style={{ perspective: '1200px' }}
+      style={{ perspective: "1200px" }}
     >
       {/* 3D Perspective container */}
       <div
         className="absolute inset-0 -z-20"
         style={{
           transform: prefersReducedMotion
-            ? 'none'
+            ? "none"
             : `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`,
-          transformStyle: 'preserve-3d' as any,
-          transition: 'transform 0.1s linear',
+          transformStyle: "preserve-3d" as any,
+          transition: "transform 0.1s linear",
         }}
       >
         <div className="absolute inset-0 bg-gradient-radial from-primary-600/10 via-transparent to-transparent" />
@@ -84,16 +84,18 @@ export default function Hero3D() {
             transition={{ duration: 0.5, delay: 0.1 }}
             style={{
               transform: prefersReducedMotion
-                ? 'none'
+                ? "none"
                 : `translateZ(${Math.max(0, 50 - transform.scrollProgress * 100)}px) rotateX(${rotX * 0.3}deg)`,
             }}
           >
             <motion.div
               className="px-4 py-2 bg-primary-600/20 rounded-full border border-primary-500/40 backdrop-blur-sm"
               whileHover={{ scale: 1.08, translateZ: 20 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
-              <p className="text-sm font-medium text-primary-300">✨ Modern inventory management</p>
+              <p className="text-sm font-medium text-primary-300">
+                ✨ Modern inventory management
+              </p>
             </motion.div>
           </motion.div>
 
@@ -110,9 +112,9 @@ export default function Hero3D() {
                 className="block bg-gradient-to-r from-primary-400 via-primary-300 to-primary-500 bg-clip-text text-transparent"
                 style={{
                   backgroundPosition: prefersReducedMotion
-                    ? '0% 0%'
+                    ? "0% 0%"
                     : `${transform.scrollProgress * 100}% 0%`,
-                  backgroundSize: '200% 100%',
+                  backgroundSize: "200% 100%",
                 }}
               >
                 Items Again
@@ -130,7 +132,8 @@ export default function Hero3D() {
               y: prefersReducedMotion ? 0 : offset * 0.5,
             }}
           >
-            Organize your personal, shared, and borrowed items with a premium, intuitive interface. Built for hostel life.
+            Organize your personal, shared, and borrowed items with a premium,
+            intuitive interface. Built for hostel life.
           </motion.p>
 
           {/* CTA Buttons with depth */}
@@ -146,7 +149,7 @@ export default function Hero3D() {
                 translateZ: prefersReducedMotion ? 0 : 20,
               }}
               whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
             >
               <Link
                 to="/dashboard"
@@ -174,31 +177,39 @@ export default function Hero3D() {
       {/* Floating accent elements for depth */}
       <motion.div
         className="absolute top-20 left-10 w-40 h-40 bg-primary-500/15 rounded-full blur-3xl pointer-events-none"
-        animate={prefersReducedMotion ? {} : {
-          y: [0, 30, 0],
-          x: [0, 20, 0],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        animate={
+          prefersReducedMotion
+            ? {}
+            : {
+                y: [0, 30, 0],
+                x: [0, 20, 0],
+              }
+        }
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         style={{
           transform: prefersReducedMotion
-            ? 'none'
+            ? "none"
             : `translateZ(${Math.max(0, 100 - transform.scrollProgress * 200)}px)`,
         }}
       />
 
       <motion.div
         className="absolute bottom-20 right-10 w-56 h-56 bg-primary-400/12 rounded-full blur-3xl pointer-events-none"
-        animate={prefersReducedMotion ? {} : {
-          y: [0, -40, 0],
-          x: [0, -20, 0],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        animate={
+          prefersReducedMotion
+            ? {}
+            : {
+                y: [0, -40, 0],
+                x: [0, -20, 0],
+              }
+        }
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         style={{
           transform: prefersReducedMotion
-            ? 'none'
+            ? "none"
             : `translateZ(${Math.max(0, 50 - transform.scrollProgress * 150)}px)`,
         }}
       />
     </section>
-  )
+  );
 }

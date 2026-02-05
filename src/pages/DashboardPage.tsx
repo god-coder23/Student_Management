@@ -1,35 +1,100 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, Filter } from 'lucide-react'
-import CategoryTabs from '../components/CategoryTabs'
-import ItemCard from '../components/ItemCard'
-import Dashboard3D from '../components/Dashboard3D'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Search, Filter } from "lucide-react";
+import CategoryTabs from "../components/CategoryTabs";
+import ItemCard from "../components/ItemCard";
+import Dashboard3D from "../components/Dashboard3D";
 
 export default function DashboardPage() {
-  const [activeCategory, setActiveCategory] = useState<'personal' | 'shared' | 'borrowed'>('personal')
-  const [searchTerm, setSearchTerm] = useState('')
+  const [activeCategory, setActiveCategory] = useState<
+    "personal" | "shared" | "borrowed"
+  >("personal");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const mockItems = {
     personal: [
-      { id: 1, name: 'Laptop', status: 'available', category: 'personal', location: 'Desk', color: 'bg-blue-100' },
-      { id: 2, name: 'Headphones', status: 'available', category: 'personal', location: 'Locker', color: 'bg-purple-100' },
-      { id: 3, name: 'Phone Charger', status: 'available', category: 'personal', location: 'Bedside', color: 'bg-amber-100' },
-      { id: 4, name: 'Books', status: 'in-use', category: 'personal', location: 'Study Table', color: 'bg-green-100' },
+      {
+        id: 1,
+        name: "Laptop",
+        status: "available",
+        category: "personal",
+        location: "Desk",
+        color: "bg-blue-100",
+      },
+      {
+        id: 2,
+        name: "Headphones",
+        status: "available",
+        category: "personal",
+        location: "Locker",
+        color: "bg-purple-100",
+      },
+      {
+        id: 3,
+        name: "Phone Charger",
+        status: "available",
+        category: "personal",
+        location: "Bedside",
+        color: "bg-amber-100",
+      },
+      {
+        id: 4,
+        name: "Books",
+        status: "in-use",
+        category: "personal",
+        location: "Study Table",
+        color: "bg-green-100",
+      },
     ],
     shared: [
-      { id: 5, name: 'Mini Fridge', status: 'available', category: 'shared', location: 'Common Room', color: 'bg-cyan-100' },
-      { id: 6, name: 'Gaming Console', status: 'in-use', category: 'shared', location: 'Lounge', color: 'bg-pink-100' },
-      { id: 7, name: 'Microwave', status: 'available', category: 'shared', location: 'Kitchen', color: 'bg-red-100' },
+      {
+        id: 5,
+        name: "Mini Fridge",
+        status: "available",
+        category: "shared",
+        location: "Common Room",
+        color: "bg-cyan-100",
+      },
+      {
+        id: 6,
+        name: "Gaming Console",
+        status: "in-use",
+        category: "shared",
+        location: "Lounge",
+        color: "bg-pink-100",
+      },
+      {
+        id: 7,
+        name: "Microwave",
+        status: "available",
+        category: "shared",
+        location: "Kitchen",
+        color: "bg-red-100",
+      },
     ],
     borrowed: [
-      { id: 8, name: 'Camera', status: 'with-owner', category: 'borrowed', location: 'Friend\'s Room', color: 'bg-indigo-100' },
-      { id: 9, name: 'Projector', status: 'available', category: 'borrowed', location: 'Common Room', color: 'bg-emerald-100' },
+      {
+        id: 8,
+        name: "Camera",
+        status: "with-owner",
+        category: "borrowed",
+        location: "Friend's Room",
+        color: "bg-indigo-100",
+      },
+      {
+        id: 9,
+        name: "Projector",
+        status: "available",
+        category: "borrowed",
+        location: "Common Room",
+        color: "bg-emerald-100",
+      },
     ],
-  }
+  };
 
-  const currentItems = mockItems[activeCategory].filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const currentItems = mockItems[activeCategory].filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   return (
     <Dashboard3D>
@@ -92,7 +157,10 @@ export default function DashboardPage() {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="mb-12"
         >
-          <CategoryTabs activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+          <CategoryTabs
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
         </motion.div>
 
         {/* Items Grid */}
@@ -123,17 +191,29 @@ export default function DashboardPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.7,
-            type: 'spring',
+            type: "spring",
             stiffness: 100,
             damping: 15,
           }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16"
         >
           {[
-            { label: 'Total Items', value: '13', color: 'from-blue-500 to-blue-600' },
-            { label: 'Available', value: '10', color: 'from-green-500 to-green-600' },
-            { label: 'In Use', value: '3', color: 'from-primary-500 to-primary-600' },
+            {
+              label: "Total Items",
+              value: "13",
+              color: "from-blue-500 to-blue-600",
+            },
+            {
+              label: "Available",
+              value: "10",
+              color: "from-green-500 to-green-600",
+            },
+            {
+              label: "In Use",
+              value: "3",
+              color: "from-primary-500 to-primary-600",
+            },
           ].map((stat, idx) => (
             <motion.div
               key={idx}
@@ -142,11 +222,11 @@ export default function DashboardPage() {
               transition={{
                 duration: 0.6,
                 delay: idx * 0.12,
-                type: 'spring',
+                type: "spring",
                 stiffness: 100,
                 damping: 15,
               }}
-              viewport={{ once: true, margin: '-50px' }}
+              viewport={{ once: true, margin: "-50px" }}
               whileHover={{ y: -4 }}
               className={`bg-gradient-to-br ${stat.color} rounded-2xl p-6 text-white shadow-medium hover:shadow-lg-soft transition-shadow`}
             >
@@ -164,7 +244,7 @@ export default function DashboardPage() {
                 transition={{
                   duration: 0.6,
                   delay: idx * 0.12 + 0.2,
-                  type: 'spring',
+                  type: "spring",
                   stiffness: 100,
                 }}
                 viewport={{ once: true }}
@@ -176,5 +256,5 @@ export default function DashboardPage() {
         </motion.div>
       </div>
     </Dashboard3D>
-  )
+  );
 }
