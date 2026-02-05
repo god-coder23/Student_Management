@@ -25,7 +25,7 @@ export default function CTA3D() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-dark-900"
       style={{ perspective: '1200px' }}
     >
       {/* Background 3D elements */}
@@ -74,7 +74,7 @@ export default function CTA3D() {
             scale: scale,
             transformStyle: 'preserve-3d' as any,
           }}
-          className="bg-gradient-to-br from-primary-600 via-primary-650 to-primary-700 rounded-3xl p-12 sm:p-20 text-center text-white shadow-lg-soft relative overflow-hidden backdrop-blur-xl border border-primary-500/20"
+          className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-12 sm:p-20 text-center text-slate-50 shadow-lg-soft relative overflow-hidden backdrop-blur-xl border border-primary-500/40"
         >
           {/* Animated background elements with 3D depth */}
           <motion.div
@@ -154,7 +154,7 @@ export default function CTA3D() {
             >
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-primary-50 transition-colors shadow-lg-soft hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-50 text-primary-700 rounded-xl font-semibold hover:bg-slate-100 transition-colors shadow-lg-soft hover:shadow-lg"
               >
                 Get Started Free
                 <motion.div
