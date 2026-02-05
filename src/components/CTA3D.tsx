@@ -116,7 +116,7 @@ export default function CTA3D() {
           </motion.h2>
 
           <motion.p
-            className="text-lg sm:text-xl mb-10 text-primary-100 relative z-10 max-w-xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl mb-10 text-slate-200 relative z-10 max-w-xl mx-auto leading-relaxed"
             style={{
               transform: prefersReducedMotion ? 'none' : 'translateZ(30px)',
             }}
@@ -154,7 +154,7 @@ export default function CTA3D() {
             >
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-50 text-primary-700 rounded-xl font-semibold hover:bg-slate-100 transition-colors shadow-lg-soft hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-50 text-primary-600 rounded-xl font-semibold hover:bg-slate-100 transition-colors shadow-lg-soft hover:shadow-lg"
               >
                 Get Started Free
                 <motion.div
