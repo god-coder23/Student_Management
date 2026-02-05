@@ -1,46 +1,11 @@
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Zap, Shield, Users, CheckCircle } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import AnimatedBlob from '../components/AnimatedBlob'
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 120,
-      damping: 14,
-      mass: 1,
-    },
-  },
-}
+import Hero3D from '../components/Hero3D'
+import FeaturesSection3D from '../components/FeaturesSection3D'
 
 export default function HomePage() {
-  const heroRef = useRef<HTMLDivElement>(null)
-  const scrollYRef = useRef(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      scrollYRef.current = window.scrollY
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <div className="relative overflow-hidden">
